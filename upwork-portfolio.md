@@ -16,7 +16,7 @@ Built an online shop for a food and wine store and loaded a large product catalo
 
 ---
 
-## 2. TrueSkills — Business Website (Launched, Client Returned for 2 More Sites)
+## 2. TrueSkills — Consultancy Business Website
 
 **Skills:** Web Development, Landing Page, Copywriting, Translation
 **Link:** https://trueskills.be
@@ -48,7 +48,7 @@ Created clean, consistent product images for a furniture catalog: furniture legs
 
 ---
 
-## 5. Custom Ukrainian Song for a Furniture & Carpet Cleaning Company
+## 5. Custom Ukrainian Song for a Cleaning Company
 
 **Skills:** Music Production, Branding
 **Link:** https://suno.com/s/o9EIoczpaSnJMRJY
