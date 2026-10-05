@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vlad R. — Websites, Multilingual Content & AI Visuals</title>
+<meta name="description" content="Websites, product catalogs, multilingual content (EN/FR/UK/RU/RO) and AI visuals for small businesses. Selected work and repeat clients.">
+<style>
+:root{
+  --bg:#0f1115;--surface:#171a21;--line:#262b36;--text:#e9ecf2;--muted:#9aa3b2;
+  --accent:#6ee7b7;--accent-2:#7aa2ff;--radius:16px;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f6f7f9;--surface:#fff;--line:#e3e6ec;--text:#14171c;--muted:#566070;--accent:#0f9d73;--accent-2:#3157d5}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent-2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{font-weight:700;letter-spacing:.2px;color:var(--text)}
+.nav nav a{margin-left:18px;color:var(--muted);font-size:.95rem}
+.nav nav a:hover{color:var(--text);text-decoration:none}
+@media(max-width:640px){.nav nav a:not(.cta){display:none}}
+.hero{padding:72px 0 56px}
+.eyebrow{color:var(--accent);font-weight:600;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.1;margin:.4em 0 .5em;max-width:18ch}
+.lead{color:var(--muted);font-size:1.15rem;max-width:60ch}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;padding:12px 20px;border-radius:12px;font-weight:600;border:1px solid var(--line);color:var(--text)}
+.btn.primary{background:var(--accent);color:#07130e;border-color:transparent}
+.btn:hover{text-decoration:none;filter:brightness(1.07)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:40px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.stat b{display:block;font-size:1.5rem}
+.stat span{color:var(--muted);font-size:.9rem}
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font-size:1.7rem;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:62ch}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.card h3{margin:.1em 0 .4em;font-size:1.15rem}
+.card p{margin:.4em 0;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tag{font-size:.78rem;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.case .shot{aspect-ratio:16/10;border-radius:12px;border:1px solid var(--line);overflow:hidden;margin-bottom:14px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 22%,var(--surface)),color-mix(in srgb,var(--accent-2) 22%,var(--surface)));
+  display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem}
+.case .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.case dl{margin:12px 0 0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:.95rem}
+.case dt{color:var(--muted)}
+.case dd{margin:0}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.gallery figure{margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.gallery figcaption{padding:8px 12px;font-size:.85rem;color:var(--muted)}
+.quote{border-left:3px solid var(--accent);padding:4px 0 4px 16px;margin:0}
+.quote p{margin:0;font-size:1.05rem}
+.quote cite{display:block;margin-top:6px;color:var(--muted);font-size:.9rem;font-style:normal}
+.steps{counter-reset:s;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.step::before{counter-increment:s;content:counter(s);display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#07130e;font-weight:700;align-items:center;justify-content:center;margin-bottom:8px}
+.step h3{margin:0 0 4px;font-size:1.05rem}
+.step p{margin:0;color:var(--muted);font-size:.95rem}
+footer{padding:40px 0 64px;border-top:1px solid var(--line);color:var(--muted)}
+.langs{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Vlad R.</a>
+    <nav>
+      <a href="#work">Websites</a>
+      <a href="#visuals">AI visuals</a>
+      <a href="#music">Music</a>
+      <a href="#clients">Clients</a>
+      <a class="cta" href="https://www.upwork.com/freelancers/~019b189a770691cc77">Hire me on Upwork</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Websites · Multilingual content · AI visuals</div>
+    <h1>Your business, online and in your customers' language.</h1>
+    <p class="lead">I build websites and online shops, fill them with product descriptions and translations, and create the visuals and sound around them. One person, clear drafts, fast replies.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://www.upwork.com/freelancers/~019b189a770691cc77">Start a project on Upwork</a>
+      <a class="btn" href="#work">See live websites</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>3 live sites</b><span>shop + two business sites</span></div>
+      <div class="stat"><b>5 languages</b><span>EN · FR · UK · RU · RO</span></div>
+      <div class="stat"><b>Repeat clients</b><span>they came back for more</span></div>
+      <div class="stat"><b>Full-time</b><span>7–8 hours a day available</span></div>
+    </div>
+  </div>
+
+  <section id="services">
+    <h2>What I do</h2>
+    <p class="sub">Three things small businesses ask for most — all delivered by me, start to finish.</p>
+    <div class="grid g3">
+      <div class="card">
+        <h3>Websites & online shops</h3>
+        <p>Landing pages, business sites and shops with a product catalog: design, build, content, launch. Mobile-ready and set up for search.</p>
+        <div class="tags"><span class="tag">Landing pages</span><span class="tag">Online shops</span><span class="tag">SEO basics</span></div>
+      </div>
+      <div class="card">
+        <h3>Catalogs & multilingual content</h3>
+        <p>Product descriptions, specs, translations and clean catalog data — in English, French, Ukrainian, Russian and Romanian.</p>
+        <div class="tags"><span class="tag">Product descriptions</span><span class="tag">Translation</span><span class="tag">Copywriting</span></div>
+      </div>
+      <div class="card">
+        <h3>AI visuals & music</h3>
+        <p>Product photos for catalogs and marketplaces, short animated clips, and custom songs and jingles for your brand.</p>
+        <div class="tags"><span class="tag">Product images</span><span class="tag">Animation</span><span class="tag">Custom songs</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2>Selected websites</h2>
+    <p class="sub">Live sites I worked on. Click through and judge for yourself.</p>
+    <div class="grid g2">
+
+      <article class="card case">
+        <div class="shot"><img src="assets/sites/delices.jpg" alt="Délices des Carpates website" onerror="this.remove()"><span>delices-carpates.vercel.app</span></div>
+        <h3>Délices des Carpates — online shop</h3>
+        <p>Online shop for a food and wine store with a large product catalog.</p>
+        <dl>
+          <dt>Task</dt><dd>Build the shop and load a catalog of wines and frozen and fresh foods.</dd>
+          <dt>I did</dt><dd>Site build, product inventory, product descriptions, image naming and sorting.</dd>
+          <dt>Link</dt><dd><a href="https://delices-carpates.vercel.app/#top-1">delices-carpates.vercel.app</a></dd>
+        </dl>
+        <div class="tags"><span class="tag">E-commerce</span><span class="tag">Catalog</span><span class="tag">Descriptions</span></div>
+      </article>
+
+      <article class="card case">
+        <div class="shot"><img src="assets/sites/trueskills.jpg" alt="TrueSkills website" onerror="this.remove()"><span>trueskills.be</span></div>
+        <h3>TrueSkills — business website</h3>
+        <p>Consultancy website, launched and handed over to the client.</p>
+        <dl>
+          <dt>Task</dt><dd>Build the site and prepare its content for launch.</dd>
+          <dt>I did</dt><dd>Website build, page content, translation review, launch checklist for the client.</dd>
+          <dt>Link</dt><dd><a href="https://trueskills.be">trueskills.be</a></dd>
+        </dl>
+        <div class="tags"><span class="tag">Business site</span><span class="tag">Content</span><span class="tag">Multilingual</span></div>
+      </article>
+
+      <article class="card case">
+        <div class="shot"><img src="assets/sites/prestigepass.jpg" alt="Prestige Pass Albania website" onerror="this.remove()"><span>prestigepassportalbania.com</span></div>
+        <h3>Prestige Pass Albania — business website</h3>
+        <p>Business website for an Albania-based project.</p>
+        <dl>
+          <dt>Task</dt><dd>A website on its own domain.</dd>
+          <dt>I did</dt><dd>Website build and content.</dd>
+          <dt>Link</dt><dd><a href="https://prestigepassportalbania.com">prestigepassportalbania.com</a></dd>
+        </dl>
+        <div class="tags"><span class="tag">Business site</span><span class="tag">Albania</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="visuals">
+    <h2>AI visuals for catalogs</h2>
+    <p class="sub">Clean product images made to order for catalogs and marketplaces — consistent background, light and angle across the whole set.</p>
+    <div class="gallery">
+      <figure><img src="assets/ai/01.jpg" alt="Gold furniture leg, product image" onerror="this.closest('figure').remove()"><figcaption>Furniture legs — gold</figcaption></figure>
+      <figure><img src="assets/ai/02.jpg" alt="Black furniture leg, product image" onerror="this.closest('figure').remove()"><figcaption>Furniture legs — black</figcaption></figure>
+      <figure><img src="assets/ai/03.jpg" alt="Product image" onerror="this.closest('figure').remove()"><figcaption>Catalog image</figcaption></figure>
+      <figure><img src="assets/ai/04.jpg" alt="Product image" onerror="this.closest('figure').remove()"><figcaption>Catalog image</figcaption></figure>
+      <figure><img src="assets/ai/05.jpg" alt="Product image" onerror="this.closest('figure').remove()"><figcaption>Catalog image</figcaption></figure>
+      <figure><img src="assets/ai/06.jpg" alt="Product image" onerror="this.closest('figure').remove()"><figcaption>Catalog image</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="music">
+    <h2>Custom songs & jingles</h2>
+    <p class="sub">A song made for a business, in the client's language, delivered fast and adjusted to the brief.</p>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Jingle for a furniture and carpet cleaning company</h3>
+        <p>Ukrainian-language song for “Nimchuk Premium Clean — Furniture & Carpets”. The client then asked for a 1:1 version for a different product (a Citroën C4), and the team's reaction was enthusiastic.</p>
+        <p><a href="https://suno.com/s/o9EIoczpaSnJMRJY">Listen to the track →</a></p>
+        <div class="tags"><span class="tag">Song</span><span class="tag">Ukrainian</span><span class="tag">Repeat request</span></div>
+      </div>
+      <div class="card">
+        <h3>What you get</h3>
+        <p>Lyrics in your language, a style that fits your brand, a few versions to pick from, and quick edits until it sounds right.</p>
+        <div class="tags"><span class="tag">Lyrics</span><span class="tag">Versions</span><span class="tag">Edits</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="clients">
+    <h2>Clients come back</h2>
+    <p class="sub">The best proof is a second order.</p>
+    <div class="grid g2">
+      <figure class="quote"><p>The website went live and the client was pleased, thanked me, and said they would definitely come back any time.</p><cite>Client, business website launch</cite></figure>
+      <figure class="quote"><p>Later the same client wrote again and asked for two more websites, both on .com domains.</p><cite>Same client, new project</cite></figure>
+      <figure class="quote"><p>Product images for a furniture catalog were approved with a one-word reply: “Ideal.”</p><cite>Client, AI product images</cite></figure>
+      <figure class="quote"><p>The song was “TOP” — and the client immediately asked for another one in the same style.</p><cite>Client, custom song</cite></figure>
+    </div>
+  </section>
+
+  <section id="process">
+    <h2>How we work</h2>
+    <p class="sub">Simple, so you always know where things stand.</p>
+    <div class="steps">
+      <div class="step"><h3>Brief</h3><p>You tell me the goal. I ask only what I need.</p></div>
+      <div class="step"><h3>Draft</h3><p>A first version fast, before any big decisions.</p></div>
+      <div class="step"><h3>Edits</h3><p>Clear rounds of changes until you are happy.</p></div>
+      <div class="step"><h3>Delivery</h3><p>Files, launch and a short handover.</p></div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--text)">Vlad R.</strong> — websites, multilingual content and AI visuals.</p>
+    <div class="langs"><span class="tag">English</span><span class="tag">Français</span><span class="tag">Українська</span><span class="tag">Русский</span><span class="tag">Română</span></div>
+    <p style="margin-top:16px"><a href="https://www.upwork.com/freelancers/~019b189a770691cc77">Upwork profile</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
