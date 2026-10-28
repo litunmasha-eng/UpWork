@@ -14,6 +14,7 @@ Read this before writing a script or editing a video for this channel. Every rul
 - On-screen captions and number graphics may still show digits.
 - Structure (same as competitor): hook "Die meisten wissen nicht…" → big visual promise → numbers → "klingt wie Science-Fiction" amplifier → context/why → who had the idea → mechanism 1 / 2 / 3 → result in numbers → twist ending → CTA "Folg für mehr Geo-Fakten".
 - Flag every fact/number the owner should verify before publishing.
+- Topics: the owner wants trend-driven, high-view topics, not only "forgotten mega-projects". Research what is trending right now (news, TikTok/Shorts formats) before proposing; the "Was wäre, wenn …?" (what-if) format is a priority direction. Prefer what-ifs we can show with real data (elevation, rivers, borders).
 
 ## Sound (owner complaint: effects far too loud, voice too quiet)
 - The **voice is the loudest element**, always. Normalise voice to about −16 LUFS before mixing.
