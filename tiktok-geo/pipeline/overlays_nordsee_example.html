@@ -1,0 +1,456 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; font-family: 'Montserrat', sans-serif; color: #fff; }
+    .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .disp { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; }
+    .shadow { text-shadow: 0 4px 0 rgba(6, 18, 38, .9), 0 10px 30px rgba(0, 0, 0, .5); }
+
+    /* vignette + subtle grade, whole film */
+    #vig { background: radial-gradient(ellipse 80% 62% at 50% 44%, rgba(6,21,42,0) 55%, rgba(6,21,42,.55) 100%),
+      linear-gradient(to bottom, rgba(6,21,42,.35), rgba(6,21,42,0) 18%, rgba(6,21,42,0) 72%, rgba(6,21,42,.45)); }
+
+    /* hook */
+    #hook-inner { position: absolute; left: 0; top: 220px; width: 1080px; text-align: center; }
+    #hook-l1 { display: block; font-size: 96px; line-height: 1; letter-spacing: 2px; }
+    #hook-l2 { display: inline-block; margin-top: 10px; font-size: 128px; line-height: 1.02; color: #FF7A1A; }
+    #hook-bar { display: block; margin: 14px auto 0; width: 420px; height: 10px; background: #4DF0C8; border-radius: 5px; }
+
+    /* sci-fi glitch */
+    #sf-scan { background: repeating-linear-gradient(to bottom, rgba(255,255,255,.07) 0 2px, rgba(0,0,0,0) 2px 6px); }
+    .sf-bar { position: absolute; left: 0; width: 1080px; mix-blend-mode: screen; }
+    #sf-text { position: absolute; left: 0; top: 330px; width: 1080px; text-align: center; font-family: 'Space Mono', monospace;
+      font-weight: 700; font-size: 74px; letter-spacing: 2px; text-shadow: -6px 0 0 #FF3D7F, 6px 0 0 #2DE2E6; }
+
+    /* study card */
+    #paper { position: absolute; left: 130px; top: 300px; width: 820px; height: 560px; background: #F3EFE6; border-radius: 22px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.55); color: #0B1B33; overflow: hidden; }
+    #paper-top { height: 64px; background: #0B1B33; color: #F3EFE6; font-weight: 800; font-size: 28px; letter-spacing: 6px; padding: 16px 40px; }
+    #paper-title { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 150px; line-height: 1; padding: 34px 40px 0; letter-spacing: 6px; }
+    #paper-sub { font-weight: 700; font-size: 36px; padding: 6px 40px 0; line-height: 1.2; }
+    #paper-auth { font-weight: 500; font-size: 28px; padding: 26px 40px 0; color: #4A5568; }
+    .paper-line { height: 12px; background: #D9D3C6; border-radius: 6px; margin: 18px 40px 0; }
+    #stamp { position: absolute; left: 560px; top: 640px; padding: 14px 30px; border: 8px solid #FF7A1A; border-radius: 16px; color: #FF7A1A;
+      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 76px; letter-spacing: 6px; background: rgba(243,239,230,.0); }
+
+    /* sea level */
+    #year { position: absolute; left: 0; top: 230px; width: 1080px; text-align: center; }
+    #year-lab { display: block; font-weight: 800; font-size: 34px; letter-spacing: 10px; color: #4DF0C8; }
+    #year-num { display: block; font-size: 190px; line-height: 1; }
+    #rise { position: absolute; left: 330px; top: 520px; width: 420px; height: 120px; border-radius: 60px; background: #FF7A1A;
+      text-align: center; font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 86px; line-height: 120px; color: #fff; }
+    #gauge { position: absolute; left: 930px; top: 300px; width: 70px; height: 560px; border: 5px solid rgba(255,255,255,.9); border-radius: 35px; overflow: hidden; background: rgba(6,21,42,.5); }
+    #gauge-fill { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; background: linear-gradient(to top, #2B8FD6, #4DF0C8); }
+    #gauge-ticks { position: absolute; left: 880px; top: 300px; width: 40px; height: 560px; }
+    .tick { position: absolute; right: 0; width: 34px; height: 4px; background: rgba(255,255,255,.85); border-radius: 2px; }
+    .tick.s { width: 18px; }
+
+    /* scientists */
+    .sci { position: absolute; top: 240px; width: 400px; height: 470px; background: rgba(8,24,46,.88); border: 4px solid rgba(255,255,255,.18);
+      border-radius: 34px; box-shadow: 0 24px 60px rgba(0,0,0,.45); text-align: center; }
+    #sci1 { left: 90px; } #sci2 { left: 590px; }
+    .sci svg { margin-top: 34px; }
+    .sci-name { font-weight: 800; font-size: 30px; letter-spacing: 3px; margin-top: 18px; }
+    .sci-tag { display: inline-block; margin-top: 14px; padding: 8px 22px; border-radius: 26px; background: rgba(255,255,255,.12);
+      font-weight: 800; font-size: 28px; letter-spacing: 4px; }
+    #kiel-tag { background: #FF7A1A; }
+    #yr2020 { position: absolute; left: 340px; top: 745px; width: 400px; height: 130px; border-radius: 65px; background: #fff; color: #0B1B33;
+      text-align: center; font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 100px; line-height: 130px; }
+    #idea { position: absolute; left: 470px; top: 140px; width: 140px; height: 140px; }
+
+    /* chips */
+    .chip { position: absolute; left: 90px; top: 220px; height: 96px; padding: 0 34px 0 0; border-radius: 48px; background: rgba(6,21,42,.82);
+      border: 3px solid rgba(255,255,255,.18); display: flex; align-items: center; }
+    .chip-n { width: 96px; height: 96px; margin: -3px 22px 0 -3px; border-radius: 48px; background: #FF7A1A; text-align: center;
+      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 60px; line-height: 96px; }
+    .chip-t { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 52px; letter-spacing: 6px; }
+
+    /* depth section */
+    #depth { overflow: hidden; background: linear-gradient(to bottom, #0B2340 0%, #0E2E52 24%, #071A33 100%); }
+    #dp-water { position: absolute; left: 0; top: 470px; width: 1080px; height: 1450px; background: linear-gradient(to bottom, #1F6E9C, #10406A 40%, #08223F); }
+    #dp-surf { position: absolute; left: 0; top: 452px; width: 1080px; height: 40px; }
+    #dp-bed { position: absolute; left: 0; top: 0; }
+    #dp-dam { position: absolute; left: 300px; top: 400px; width: 190px; height: 820px; }
+    #dp-line { position: absolute; left: 560px; top: 470px; width: 6px; height: 700px; background: repeating-linear-gradient(to bottom, #fff 0 18px, rgba(0,0,0,0) 18px 32px); }
+    #dp-num { position: absolute; left: 590px; top: 700px; font-size: 150px; line-height: 1; }
+    #dp-num-sub { position: absolute; left: 596px; top: 860px; font-weight: 800; font-size: 34px; letter-spacing: 6px; color: #4DF0C8; }
+    #dp-eiffel { position: absolute; left: 790px; top: 444px; width: 230px; height: 728px; }
+    #dp-eiffel-lab { position: absolute; left: 700px; top: 380px; width: 380px; text-align: center; font-weight: 800; font-size: 28px; letter-spacing: 2px; color: rgba(255,255,255,.85); }
+
+    /* problem */
+    #prob { position: absolute; left: 340px; top: 220px; width: 400px; text-align: center; }
+    #prob-t { font-size: 70px; letter-spacing: 8px; margin-top: 4px; }
+
+    /* day/night */
+    #night { background: #020814; }
+    #sunmoon { position: absolute; left: 470px; top: 230px; width: 140px; height: 140px; }
+
+    /* stats */
+    #dim { background: rgba(6,21,42,.78); }
+    .stat { position: absolute; left: 0; width: 1080px; text-align: center; }
+    #st1 { top: 300px; } #st2 { top: 700px; }
+    .st-lab { font-weight: 800; font-size: 38px; letter-spacing: 12px; color: #FF7A1A; }
+    .st-num { font-size: 200px; line-height: 1.02; }
+    #st2 .st-lab { color: #4DF0C8; }
+    #people { position: absolute; left: 190px; top: 1010px; width: 700px; height: 90px; }
+
+    /* blueprint + warning */
+    #bp { background-color: rgba(12, 52, 110, .93);
+      background-image: linear-gradient(rgba(255,255,255,.12) 2px, transparent 2px), linear-gradient(90deg, rgba(255,255,255,.12) 2px, transparent 2px);
+      background-size: 60px 60px; }
+    #bp-title { position: absolute; left: 0; top: 250px; width: 1080px; text-align: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 84px; letter-spacing: 10px; }
+    #bp-draw { position: absolute; left: 140px; top: 420px; width: 800px; height: 600px; }
+    #bp-x { position: absolute; left: 140px; top: 220px; width: 800px; height: 820px; }
+    #warn { position: absolute; left: 110px; top: 470px; width: 860px; height: 320px; border: 12px solid #FF7A1A; border-radius: 34px;
+      background: rgba(6,21,42,.88); text-align: center; }
+    #warn svg { position: absolute; left: 60px; top: 70px; }
+    #warn-t { position: absolute; left: 225px; top: 75px; font-size: 140px; line-height: 1; color: #FF7A1A; letter-spacing: 6px; }
+    #flash { background: #fff; }
+
+    /* CTA */
+    #cta-bg { background: rgba(6,21,42,.72); }
+    #cta-av { position: absolute; left: 400px; top: 440px; width: 280px; height: 280px; }
+    #cta-btn { position: absolute; left: 490px; top: 690px; width: 100px; height: 100px; border-radius: 50px; background: #FF7A1A;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+    #cta-btn svg { position: absolute; left: 0; top: 0; }
+    #cta-t1 { position: absolute; left: 0; top: 840px; width: 1080px; text-align: center; font-size: 120px; line-height: 1; }
+    #cta-t2 { position: absolute; left: 0; top: 980px; width: 1080px; text-align: center; font-weight: 800; font-size: 44px; color: #4DF0C8; letter-spacing: 2px; }
+    #cta-credit { position: absolute; left: 0; top: 1290px; width: 1080px; text-align: center; font-weight: 500; font-size: 22px; color: rgba(255,255,255,.6); }
+  </style>
+  <div id="root" data-composition-id="overlays" data-width="1080" data-height="1920">
+
+    <div id="vig" class="full clip" data-start="0" data-duration="75.5" data-layout-ignore></div>
+
+    <!-- 0 hook -->
+    <div id="hook" class="full clip" data-start="0" data-duration="3.4">
+      <div id="hook-inner" class="disp shadow">
+        <span id="hook-l1">Die Nordsee</span>
+        <span id="hook-l2">zumauern?!</span>
+        <span id="hook-bar"></span>
+      </div>
+    </div>
+
+    <!-- 4 sci-fi glitch -->
+    <div id="scifi" class="full clip" data-start="14.55" data-duration="2.0" data-layout-allow-overlap>
+      <div id="sf-scan" class="full"></div>
+      <div id="sf-b1" class="sf-bar" style="top: 380px; height: 70px; background: rgba(255,61,127,.35);"></div>
+      <div id="sf-b2" class="sf-bar" style="top: 760px; height: 34px; background: rgba(45,226,230,.35);"></div>
+      <div id="sf-b3" class="sf-bar" style="top: 1010px; height: 110px; background: rgba(255,255,255,.12);"></div>
+      <div id="sf-text">SCIENCE FICTION?</div>
+    </div>
+
+    <!-- 4b study card -->
+    <div id="study" class="full clip" data-start="16.4" data-duration="3.2" data-layout-allow-overlap>
+      <div id="paper">
+        <div id="paper-top">STUDIE · 2020</div>
+        <div id="paper-title">NEED</div>
+        <div id="paper-sub">Northern European<br>Enclosure Dam</div>
+        <div id="paper-auth">Groeskamp &amp; Kjellsson</div>
+        <div class="paper-line" style="width: 640px;"></div>
+        <div class="paper-line" style="width: 520px;"></div>
+      </div>
+      <div id="stamp">ECHT ✓</div>
+    </div>
+
+    <!-- 5 sea level -->
+    <div id="sealevel" class="full clip" data-start="19.6" data-duration="6.5" data-layout-allow-overlap>
+      <div id="year" class="shadow">
+        <span id="year-lab">MEERESSPIEGEL</span>
+        <span id="year-num" class="disp">2026</span>
+      </div>
+      <div id="rise">▲ +1 M</div>
+      <div id="gauge-ticks">
+        <div class="tick" style="top: 0;"></div><div class="tick s" style="top: 138px;"></div>
+        <div class="tick" style="top: 278px;"></div><div class="tick s" style="top: 418px;"></div>
+        <div class="tick" style="top: 556px;"></div>
+      </div>
+      <div id="gauge"><div id="gauge-fill"></div></div>
+    </div>
+
+    <!-- 6 scientists -->
+    <div id="scis" class="full clip" data-start="26.7" data-duration="6.5" data-layout-allow-overlap>
+      <div id="sci1" class="sci">
+        <svg width="260" height="260" viewBox="0 0 260 260">
+          <circle cx="130" cy="130" r="126" fill="#1C4A72"/>
+          <path d="M40,250 Q46,170 130,166 Q214,170 220,250Z" fill="#F3EFE6"/>
+          <path d="M112,168 L130,214 L148,168Z" fill="#4DF0C8"/>
+          <circle cx="130" cy="112" r="50" fill="#E9B98F"/>
+          <path d="M80,106 Q84,52 132,54 Q178,56 182,104 Q160,80 128,84 Q100,86 80,106Z" fill="#3B2A20"/>
+          <circle cx="112" cy="114" r="15" fill="none" stroke="#0B1B33" stroke-width="5"/>
+          <circle cx="150" cy="114" r="15" fill="none" stroke="#0B1B33" stroke-width="5"/>
+          <path d="M127,114 H135" stroke="#0B1B33" stroke-width="5"/>
+          <path d="M116,140 Q130,150 144,140" fill="none" stroke="#0B1B33" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <div class="sci-name">OZEANFORSCHER</div>
+        <div class="sci-tag">#1</div>
+      </div>
+      <div id="sci2" class="sci">
+        <svg width="260" height="260" viewBox="0 0 260 260">
+          <circle cx="130" cy="130" r="126" fill="#245A54"/>
+          <path d="M40,250 Q46,170 130,166 Q214,170 220,250Z" fill="#F3EFE6"/>
+          <path d="M112,168 L130,214 L148,168Z" fill="#FF7A1A"/>
+          <circle cx="130" cy="112" r="50" fill="#F1C7A0"/>
+          <path d="M78,112 Q76,50 132,52 Q186,54 184,112 Q176,74 132,72 Q92,72 78,112Z" fill="#C9A15A"/>
+          <path d="M100,162 Q130,190 160,162 Q160,150 130,150 Q100,150 100,162Z" fill="#C9A15A"/>
+          <circle cx="114" cy="112" r="6" fill="#0B1B33"/>
+          <circle cx="148" cy="112" r="6" fill="#0B1B33"/>
+          <path d="M118,138 Q131,146 144,138" fill="none" stroke="#0B1B33" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <div class="sci-name">OZEANFORSCHER</div>
+        <div id="kiel-tag" class="sci-tag">KIEL</div>
+      </div>
+      <div id="yr2020">2020</div>
+      <svg id="idea" viewBox="0 0 140 140">
+        <g fill="#FF7A1A">
+          <path d="M70,4 L80,52 L128,40 L88,72 L120,112 L72,90 L48,134 L52,86 L8,76 L54,58Z"/>
+        </g>
+        <circle cx="70" cy="70" r="20" fill="#fff"/>
+      </svg>
+    </div>
+
+    <!-- 7/8 chips -->
+    <div id="chip1" class="chip clip" data-start="33.2" data-duration="6.6"><div class="chip-n">1</div><div class="chip-t">DAMM</div></div>
+    <div id="chip2" class="chip clip" data-start="39.9" data-duration="7.6"><div class="chip-n">2</div><div class="chip-t">DAMM</div></div>
+
+    <!-- 8b depth section -->
+    <div id="depth" class="full clip" data-start="47.55" data-duration="3.4" data-layout-allow-overlap>
+      <div id="dp-water"></div>
+      <svg id="dp-surf" width="1080" height="40" viewBox="0 0 1080 40"><path d="M0,18 Q45,4 90,18 T180,18 T270,18 T360,18 T450,18 T540,18 T630,18 T720,18 T810,18 T900,18 T990,18 T1080,18 V40 H0Z" fill="#2B8FD6"/></svg>
+      <svg id="dp-bed" width="1080" height="1920" viewBox="0 0 1080 1920">
+        <path d="M0,1010 C120,1020 200,1120 300,1170 C380,1200 460,1180 520,1172 C620,1160 700,1176 800,1172 C900,1168 980,1070 1080,1030 V1920 H0Z" fill="#0A1626"/>
+        <path d="M0,1010 C120,1020 200,1120 300,1170 C380,1200 460,1180 520,1172 C620,1160 700,1176 800,1172 C900,1168 980,1070 1080,1030" fill="none" stroke="#4DF0C8" stroke-opacity=".5" stroke-width="4"/>
+      </svg>
+      <svg id="dp-dam" width="190" height="820" viewBox="0 0 190 820">
+        <path d="M30,0 H160 L190,820 H0Z" fill="#C9D3DD"/>
+        <path d="M30,0 H160 L166,140 H24Z" fill="#E6EDF3"/>
+        <rect x="24" y="0" width="142" height="22" fill="#FF7A1A"/>
+        <g stroke="#8FA0B2" stroke-width="4"><path d="M10,300 H180"/><path d="M6,480 H184"/><path d="M3,660 H188"/></g>
+      </svg>
+      <div id="dp-line"></div>
+      <div id="dp-num" class="disp shadow">300+ M</div>
+      <div id="dp-num-sub">TIEFE</div>
+      <svg id="dp-eiffel" viewBox="0 0 230 728" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="5" stroke-linejoin="round">
+        <path d="M115,0 V40 M105,40 H125 L132,200 L150,380 L175,520 L230,728 H180 Q115,610 50,728 H0 L55,520 L80,380 L98,200Z"/>
+        <path d="M80,380 H150 M55,520 H175 M98,200 H132"/>
+        <path d="M86,380 L170,520 M144,380 L60,520"/>
+      </svg>
+      <div id="dp-eiffel-lab">EIFFELTURM 330 M</div>
+    </div>
+
+    <!-- 9 problem -->
+    <div id="problem" class="full clip" data-start="51.45" data-duration="4.2">
+      <div id="prob">
+        <svg id="prob-ic" width="190" height="170" viewBox="0 0 190 170">
+          <path d="M95,8 L184,162 H6Z" fill="#FF7A1A" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+          <rect x="86" y="58" width="18" height="58" rx="8" fill="#fff"/><circle cx="95" cy="136" r="11" fill="#fff"/>
+        </svg>
+        <div id="prob-t" class="disp shadow">PROBLEM</div>
+      </div>
+    </div>
+
+    <!-- 9b day / night -->
+    <div id="daynight" class="full clip" data-start="57.4" data-duration="1.4" data-layout-allow-overlap>
+      <div id="night" class="full"></div>
+      <svg id="sunmoon" viewBox="0 0 140 140">
+        <g id="sun"><circle cx="70" cy="70" r="30" fill="#FFC23D"/>
+          <g stroke="#FFC23D" stroke-width="9" stroke-linecap="round"><path d="M70,8 V24 M70,116 V132 M8,70 H24 M116,70 H132 M26,26 L37,37 M103,103 L114,114 M26,114 L37,103 M103,37 L114,26"/></g></g>
+        <path id="moon" d="M92,22 A50,50 0 1,0 118,92 A40,40 0 1,1 92,22Z" fill="#DCE8FF"/>
+      </svg>
+    </div>
+
+    <!-- 10 stats -->
+    <div id="stats" class="full clip" data-start="59.9" data-duration="7.45" data-layout-allow-overlap>
+      <div id="dim" class="full"></div>
+      <div id="st1" class="stat"><div class="st-lab">KOSTEN BIS ZU</div><div id="st1-num" class="st-num disp shadow">0 MRD. €</div></div>
+      <div id="st2" class="stat"><div class="st-lab">GESCHÜTZT</div><div id="st2-num" class="st-num disp shadow">0 MIO.</div></div>
+      <svg id="people" viewBox="0 0 700 90">
+        <g fill="#4DF0C8">
+          <g class="pp"><circle cx="35" cy="22" r="16"/><path d="M10,88 Q12,46 35,44 Q58,46 60,88Z"/></g>
+          <g class="pp"><circle cx="105" cy="22" r="16"/><path d="M80,88 Q82,46 105,44 Q128,46 130,88Z"/></g>
+          <g class="pp"><circle cx="175" cy="22" r="16"/><path d="M150,88 Q152,46 175,44 Q198,46 200,88Z"/></g>
+          <g class="pp"><circle cx="245" cy="22" r="16"/><path d="M220,88 Q222,46 245,44 Q268,46 270,88Z"/></g>
+          <g class="pp"><circle cx="315" cy="22" r="16"/><path d="M290,88 Q292,46 315,44 Q338,46 340,88Z"/></g>
+          <g class="pp"><circle cx="385" cy="22" r="16"/><path d="M360,88 Q362,46 385,44 Q408,46 410,88Z"/></g>
+          <g class="pp"><circle cx="455" cy="22" r="16"/><path d="M430,88 Q432,46 455,44 Q478,46 480,88Z"/></g>
+          <g class="pp"><circle cx="525" cy="22" r="16"/><path d="M500,88 Q502,46 525,44 Q548,46 550,88Z"/></g>
+          <g class="pp"><circle cx="595" cy="22" r="16"/><path d="M570,88 Q572,46 595,44 Q618,46 620,88Z"/></g>
+          <g class="pp"><circle cx="665" cy="22" r="16"/><path d="M640,88 Q642,46 665,44 Q688,46 690,88Z"/></g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- 11 blueprint, warning -->
+    <div id="blueprint" class="full clip" data-start="69.4" data-duration="2.1" data-layout-allow-overlap>
+      <div id="bp" class="full"></div>
+      <div id="bp-title">BAUPLAN</div>
+      <svg id="bp-draw" viewBox="0 0 800 600" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <path class="bpl" pathLength="1" d="M60,520 L120,380 L170,300 L250,230 L330,180 L420,150 L520,130 L640,110 L740,100"/>
+        <path class="bpl" pathLength="1" d="M60,560 L740,560"/>
+        <path class="bpl" pathLength="1" d="M100,560 L100,520 M300,560 L300,500 M500,560 L500,500 M700,560 L700,520"/>
+        <path class="bpl" pathLength="1" d="M330,180 L330,90 M330,90 L520,90 M520,90 L520,130"/>
+      </svg>
+      <svg id="bp-x" viewBox="0 0 800 820" fill="none" stroke="#FF7A1A" stroke-width="34" stroke-linecap="round">
+        <path class="bpx" pathLength="1" d="M90,120 L710,760"/>
+        <path class="bpx" pathLength="1" d="M710,120 L90,760"/>
+      </svg>
+    </div>
+    <div id="flash" class="full clip" data-start="71.4" data-duration="0.4" data-layout-ignore></div>
+    <div id="warning" class="full clip" data-start="71.4" data-duration="1.3">
+      <div id="warn">
+        <svg width="150" height="140" viewBox="0 0 190 170">
+          <path d="M95,8 L184,162 H6Z" fill="#FF7A1A" stroke="#fff" stroke-width="8" stroke-linejoin="round"/>
+          <rect x="86" y="58" width="18" height="58" rx="8" fill="#fff"/><circle cx="95" cy="136" r="11" fill="#fff"/>
+        </svg>
+        <div id="warn-t" class="disp">WARNUNG</div>
+      </div>
+    </div>
+
+    <!-- 12 CTA -->
+    <div id="cta" class="full clip" data-start="72.6" data-duration="2.9">
+      <div id="cta-bg" class="full"></div>
+      <svg id="cta-av" viewBox="0 0 280 280">
+        <circle cx="140" cy="140" r="132" fill="#0E2E52" stroke="#FF7A1A" stroke-width="12"/>
+        <g fill="none" stroke="#4DF0C8" stroke-width="7">
+          <circle cx="140" cy="140" r="82"/>
+          <ellipse cx="140" cy="140" rx="36" ry="82"/>
+          <path d="M58,140 H222 M72,98 H208 M72,182 H208"/>
+        </g>
+      </svg>
+      <div id="cta-btn">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <path id="cta-plus" d="M50,26 V74 M26,50 H74" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+          <path id="cta-check" d="M28,52 L44,68 L74,34" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        </svg>
+      </div>
+      <div id="cta-t1" class="disp shadow">FOLGEN</div>
+      <div id="cta-t2">für mehr Geo-Fakten</div>
+      <div id="cta-credit" data-layout-ignore>Kartendaten: Natural Earth · Terrain Tiles (Mapzen / AWS Open Data)</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // seeded jitter for the glitch
+      let seed = 7;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+
+      // hook (visible on frame 0)
+      tl.fromTo("#hook-l1", { opacity: 1, y: 0 }, { opacity: 1, y: 0, duration: 0.01 }, 0);
+      tl.fromTo("#hook-l2", { scale: 1.12, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.5, ease: "power3.out" }, 0);
+      tl.fromTo("#hook-bar", { scaleX: 0.2, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 0.1);
+      tl.to("#hook-inner", { y: -60, opacity: 0, duration: 0.35, ease: "power2.in" }, 3.0);
+
+      // sci-fi glitch: 14.55 - 16.55
+      tl.fromTo("#scifi", { opacity: 0 }, { opacity: 1, duration: 0.04 }, 14.55);
+      for (let i = 0; i < 14; i++) {
+        const t = 14.58 + i * 0.07;
+        tl.set("#sf-b1", { y: (rnd() - 0.5) * 900, scaleY: 0.4 + rnd() * 2 }, t);
+        tl.set("#sf-b2", { y: (rnd() - 0.5) * 900, scaleY: 0.4 + rnd() * 2 }, t);
+        tl.set("#sf-b3", { y: (rnd() - 0.5) * 700, opacity: rnd() }, t);
+        tl.set("#sf-text", { x: (rnd() - 0.5) * 40, skewX: (rnd() - 0.5) * 16 }, t);
+      }
+      tl.set("#sf-text", { x: 0, skewX: 0 }, 15.6);
+      tl.fromTo("#sf-text", { scale: 1 }, { scale: 1.06, duration: 0.8, ease: "sine.out" }, 15.6);
+      tl.to("#scifi", { opacity: 0, duration: 0.15 }, 16.38);
+
+      // study card
+      tl.fromTo("#paper", { y: 900, rotation: 6 }, { y: 0, rotation: -2, duration: 0.45, ease: "back.out(1.4)" }, 16.42);
+      tl.fromTo("#stamp", { opacity: 0, scale: 2.4, rotation: -4 }, { opacity: 1, scale: 1, rotation: -12, duration: 0.18, ease: "power4.in" }, 18.05);
+      tl.fromTo("#paper", { x: 0 }, { x: 10, duration: 0.04, yoyo: true, repeat: 3, ease: "none" }, 18.23);
+      tl.to("#paper, #stamp", { y: 1100, duration: 0.35, ease: "power3.in" }, 19.2);
+
+      // sea level
+      tl.fromTo("#year", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 19.65);
+      tl.fromTo("#gauge, #gauge-ticks", { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, 19.75);
+      tl.fromTo("#gauge-fill", { yPercent: 92 }, { yPercent: 50, duration: 2.0, ease: "power1.inOut" }, 20.0);
+      tl.to("#gauge-fill", { yPercent: 0, duration: 1.2, ease: "power2.out" }, 24.4);
+      const yr = { v: 2026 };
+      const yrEl = document.querySelector("#year-num");
+      tl.fromTo(yr, { v: 2026 }, { v: 2100, duration: 1.1, ease: "power2.out", onUpdate: () => { yrEl.textContent = Math.round(yr.v); } }, 22.1);
+      tl.fromTo("#year-num", { scale: 1 }, { scale: 1.12, duration: 0.12, yoyo: true, repeat: 1, transformOrigin: "50% 50%" }, 23.15);
+      tl.fromTo("#rise", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)" }, 24.5);
+      tl.to("#year, #rise, #gauge, #gauge-ticks", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, 25.75);
+
+      // scientists
+      tl.fromTo("#sci1", { y: -700, rotation: -8 }, { y: 0, rotation: -3, duration: 0.45, ease: "back.out(1.5)" }, 26.85);
+      tl.fromTo("#sci2", { y: -700, rotation: 8 }, { y: 0, rotation: 3, duration: 0.45, ease: "back.out(1.5)" }, 27.05);
+      tl.fromTo("#kiel-tag", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(3)" }, 29.2);
+      tl.fromTo("#sci2", { scale: 1 }, { scale: 1.06, duration: 0.15, yoyo: true, repeat: 1, transformOrigin: "50% 50%" }, 29.2);
+      tl.fromTo("#yr2020", { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.in" }, 30.5);
+      tl.fromTo("#idea", { opacity: 0, scale: 0, rotation: -40, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1.25, rotation: 0, duration: 0.3, ease: "back.out(3)" }, 31.7);
+      tl.to("#idea", { rotation: 30, scale: 1.1, duration: 1.0, ease: "sine.inOut" }, 32.0);
+      tl.fromTo("#sci1, #sci2", { x: 0 }, { x: 8, duration: 0.04, yoyo: true, repeat: 5, ease: "none" }, 31.75);
+      tl.to("#sci1, #sci2, #yr2020, #idea", { y: -900, duration: 0.4, ease: "power3.in", stagger: 0.04 }, 32.75);
+
+      // chips
+      tl.fromTo("#chip1", { x: -500, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 33.25);
+      tl.to("#chip1", { x: -500, opacity: 0, duration: 0.25, ease: "power2.in" }, 39.5);
+      tl.fromTo("#chip2", { x: -500, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 40.0);
+      tl.to("#chip2", { x: -500, opacity: 0, duration: 0.25, ease: "power2.in" }, 47.2);
+
+      // depth section
+      tl.fromTo("#depth", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.32, ease: "power3.inOut" }, 47.55);
+      tl.fromTo("#dp-dam", { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.8, ease: "power3.out" }, 47.95);
+      tl.fromTo("#dp-line", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.5, ease: "power2.inOut" }, 48.8);
+      tl.fromTo("#dp-num, #dp-num-sub", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 49.2);
+      tl.fromTo("#dp-eiffel", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 49.65);
+      tl.fromTo("#dp-eiffel-lab", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 49.85);
+      tl.fromTo("#dp-water", { y: 0 }, { y: -10, duration: 3.0, ease: "sine.inOut" }, 47.6);
+      tl.to("#depth", { clipPath: "inset(0 0 100% 0)", duration: 0.3, ease: "power3.inOut" }, 50.65);
+
+      // problem
+      tl.fromTo("#prob", { opacity: 0, scale: 0.4, transformOrigin: "50% 30%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)" }, 51.5);
+      tl.fromTo("#prob-ic", { rotation: 0, transformOrigin: "50% 60%" }, { rotation: 6, duration: 0.08, yoyo: true, repeat: 5 }, 51.85);
+      tl.to("#prob", { opacity: 0, y: -40, duration: 0.3 }, 55.35);
+
+      // day / night
+      tl.fromTo("#night", { opacity: 0 }, { opacity: 0.5, duration: 0.2 }, 57.85);
+      tl.to("#night", { opacity: 0, duration: 0.25 }, 58.45);
+      tl.fromTo("#sunmoon", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 57.5);
+      tl.fromTo("#sun", { opacity: 1, rotation: 0, svgOrigin: "70 70" }, { opacity: 0, rotation: 90, duration: 0.2 }, 57.88);
+      tl.fromTo("#moon", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 57.9);
+      tl.to("#sunmoon", { opacity: 0, duration: 0.2 }, 58.55);
+
+      // stats
+      tl.fromTo("#dim", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 59.9);
+      tl.fromTo("#st1", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 60.2);
+      const c1 = { v: 0 }, c1El = document.querySelector("#st1-num");
+      tl.fromTo(c1, { v: 0 }, { v: 550, duration: 1.15, ease: "power2.out", onUpdate: () => { c1El.textContent = Math.round(c1.v) + " MRD. €"; } }, 61.45);
+      tl.fromTo("#st1-num", { scale: 1 }, { scale: 1.1, duration: 0.1, yoyo: true, repeat: 1, transformOrigin: "50% 50%" }, 62.6);
+      tl.fromTo("#st2", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 63.95);
+      const c2 = { v: 0 }, c2El = document.querySelector("#st2-num");
+      tl.fromTo(c2, { v: 0 }, { v: 25, duration: 1.0, ease: "power2.out", onUpdate: () => { c2El.textContent = Math.round(c2.v) + " MIO."; } }, 65.3);
+      tl.fromTo("#st2-num", { scale: 1 }, { scale: 1.1, duration: 0.1, yoyo: true, repeat: 1, transformOrigin: "50% 50%" }, 66.3);
+      tl.fromTo("#people .pp", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.2, stagger: 0.08, ease: "back.out(2)" }, 65.4);
+      tl.to("#st1, #st2, #people", { opacity: 0, y: -40, duration: 0.25, ease: "power2.in" }, 67.05);
+      tl.to("#dim", { opacity: 0, duration: 0.3 }, 67.1);
+
+      // blueprint
+      tl.fromTo("#blueprint", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.25, ease: "power3.out" }, 69.4);
+      tl.fromTo("#bp-draw .bpl", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.5, stagger: 0.08, ease: "power2.out" }, 69.5);
+      tl.fromTo("#bp-x .bpx", { attr: { "stroke-dasharray": "1 1", "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.18, stagger: 0.14, ease: "power3.in" }, 69.98);
+      tl.to("#blueprint", { opacity: 0, duration: 0.1 }, 71.38);
+
+      // warning
+      tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.55, duration: 0.04 }, 71.4);
+      tl.to("#flash", { opacity: 0, duration: 0.3 }, 71.45);
+      tl.fromTo("#warn", { opacity: 0, scale: 2.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.16, ease: "power4.in" }, 71.3);
+      tl.fromTo("#warn", { rotation: 0 }, { rotation: -3, duration: 0.05, yoyo: true, repeat: 5, ease: "none" }, 71.47);
+      tl.to("#warn", { opacity: 0, scale: 0.8, duration: 0.2, ease: "power2.in" }, 72.45);
+
+      // CTA
+      tl.fromTo("#cta-bg", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 72.6);
+      tl.fromTo("#cta-av", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 72.65);
+      tl.fromTo("#cta-btn", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(3)" }, 72.9);
+      tl.fromTo("#cta-t1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 72.85);
+      tl.fromTo("#cta-t2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 73.0);
+      tl.fromTo("#cta-credit", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 73.1);
+      tl.to("#cta-btn", { scale: 0.82, duration: 0.08, yoyo: true, repeat: 1 }, 73.95);
+      tl.to("#cta-plus", { opacity: 0, duration: 0.08 }, 74.0);
+      tl.to("#cta-check", { opacity: 1, duration: 0.1 }, 74.02);
+      tl.to("#cta-btn", { backgroundColor: "#2BB673", duration: 0.15 }, 74.0);
+      tl.fromTo("#cta-av", { rotation: 0 }, { rotation: 8, duration: 2.6, ease: "sine.inOut" }, 72.9);
+
+      window.__timelines["overlays"] = tl;
+    })();
+  </script>
+</template>
